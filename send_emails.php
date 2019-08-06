@@ -1,12 +1,12 @@
 <?php
-require './vendor/autoload.php';
-require './rb.php';
+require 'vendor/autoload.php';
+require __DIR__ . '/rb.php';
 
 use Symfony\Component\Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
 
 $dotenv = new Dotenv();
-$dotenv->loadEnv(__DIR__.'/.env');
+$dotenv->loadEnv('.env');
 
 $twig_loader = new \Twig\Loader\FilesystemLoader($_ENV['SEND_EMAILS_TEMPLATES_PATH']);
 $twig = new \Twig\Environment($twig_loader);
