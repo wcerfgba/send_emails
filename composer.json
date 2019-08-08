@@ -1,6 +1,6 @@
 {
     "name": "wcerfgba/send_emails",
-    "description": "A simple script to send emails from jobs in a database table. Suitable for cron.",
+    "description": "A simple script to send emails from jobs in a database table. Suitable for cron. Copy-and-edit.",
     "authors": [
         {
             "name": "John Preston",
@@ -11,7 +11,6 @@
     "require": {
         "php": "^7.0",
         "phpmailer/phpmailer": "~6.0",
-        "twig/twig": "^2.11",
         "symfony/dotenv": "^4.3"
     }
 }

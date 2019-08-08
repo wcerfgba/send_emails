@@ -1,5 +1,6 @@
+#!/usr/bin/env php
 <?php
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/rb.php';
 
 use Symfony\Component\Dotenv\Dotenv;
@@ -44,10 +45,10 @@ foreach ($jobs as $job) {
     $mail->SMTPSecure = 'ssl';
     $mail->Port       = 465;
 
-    $data = $job->export();
+    // Access data from the $job bean.
 
     $mail->setFrom($_ENV['SEND_EMAILS_FROM_EMAIL'], $_ENV['SEND_EMAILS_FROM_NAME']);
-    $mail->addAddress($data[$_ENV['SEND_EMAILS_DATABASE_RECIPIENT_COLUMN']]);
+    $mail->addAddress($job[$_ENV['SEND_EMAILS_DATABASE_RECIPIENT_COLUMN']]);
     if (!empty($_ENV['SEND_EMAILS_REPLYTO_EMAIL'])) {
       $mail->addReplyTo($_ENV['SEND_EMAILS_REPLYTO_EMAIL'], $_ENV['SEND_EMAILS_REPLYTO_NAME']);
     }
@@ -56,8 +57,11 @@ foreach ($jobs as $job) {
     }
 
     $mail->isHTML(false);
-    $mail->Subject = $twig->render($data['template'] . '.subject.twig', $data);
-    $mail->Body = $twig->render($data['template'] . '.twig', $data);
+    $mail->Subject = 'Your subject';
+    $mail->Body = <<<EOF
+Your Body.    
+EOF
+;
 
     // var_dump($mail); // For debugging ;)
 
